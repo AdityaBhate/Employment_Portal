@@ -5,9 +5,10 @@ import React, { useState, useEffect } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { indianStates } from "../../../../utils/states";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 
 function LabourRegister() {
@@ -35,7 +36,103 @@ function LabourRegister() {
 	const [message, setMessage] = useState("");
 	const [data, setData] = useState([]);
 
-	useEffect(() => {}, []);
+	const validateForm = () => {
+		let isValid = true;
+
+		if (labourName === "") {
+			isValid = false;
+		}
+		if (state === "") {
+			isValid = false;
+		}
+
+		if (fatherName === "") {
+			isValid = false;
+		}
+		if (gender === "") {
+			isValid = false;
+		}
+		if (dob === "") {
+			isValid = false;
+		}
+		if (caste === "") {
+			isValid = false;
+		}
+		if (mobileNumber === "") {
+			isValid = false;
+		}
+		if (aadharNumber === "") {
+			isValid = false;
+		}
+		if (districtName === "") {
+			isValid = false;
+		}
+		if (residentialAddress === "") {
+			isValid = false;
+		}
+		if (education === "") {
+			isValid = false;
+		}
+		if (workEfficiency === "") {
+			isValid = false;
+		}
+		if (bankName === "") {
+			isValid = false;
+		}
+		if (branchName === "") {
+			isValid = false;
+		}
+		if (accountName === "") {
+			isValid = false;
+		}
+		if (ifscCode === "") {
+			isValid = false;
+		}
+		if (accountNumber === "") {
+			isValid = false;
+		}
+
+		return isValid;
+	};
+
+	const registerLabour = async () => {
+		setLoading(true);
+		if (validateForm()) {
+			const payload = {
+				labourName,
+				fatherName,
+				gender,
+				dob,
+				caste,
+				mobileNumber,
+				aadharNumber,
+				districtName,
+				residentialAddress,
+				education,
+				workEfficiency,
+				state,
+				bankName,
+				branchName,
+				accountName,
+				ifscCode,
+				accountNumber,
+			};
+			axios
+				.post("/api/auth/register/labour", payload)
+				.then((response) => {
+					setData(response.data);
+					setLoading(false);
+					toast.success("Labour registered successfully!");
+				})
+				.catch((error) => {
+					setLoading(false);
+					toast.error(error.message);
+				});
+		} else {
+			setLoading(false);
+			toast.error("Please fill all required fields correctly.");
+		}
+	};
 
 	return (
 		<>
@@ -257,8 +354,10 @@ function LabourRegister() {
 						<Button
 							className='bg-green-400 text-black w-[90%]'
 							variant='contained'
-							color='success'>
-							Submit
+							color='success'
+							disabled={loading}
+							onClick={() => registerLabour()}>
+							{loading ? <CircularProgress /> : "Submit"}
 						</Button>
 					</div>
 				</div>
