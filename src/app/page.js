@@ -5,11 +5,31 @@ import Image from "next/image";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 import ONE from "../assets/carousel-one.png";
+import TWO from "../assets/Carousel2.jpeg";
+import THREE from "../assets/Carousel3.jpeg";
+import FOUR from "../assets/Carousel4.jpeg";
+import FIVE from "../assets/Carousel5.jpeg";
+import SIX from "../assets/Carousel6.jpeg";
 
 export default function Home() {
 	var items = [
 		{
 			path: ONE,
+		},
+		{
+			path: TWO,
+		},
+		{
+			path: THREE,
+		},
+		{
+			path: FOUR,
+		},
+		{
+			path: FIVE,
+		},
+		{
+			path: SIX,
 		},
 	];
 
@@ -17,9 +37,8 @@ export default function Home() {
 		<>
 			<div className='flex flex-col min-h-screen'>
 				<div className='flex-grow'>
-					<h4 className='text-center text-xl p-4 text-black mb-auto'>Home</h4>
 					<div className='m-4'>
-						<Carousel>
+						<Carousel className="">
 							{items.map((item, i) => (
 								<Item key={i} item={item} />
 							))}
@@ -39,8 +58,10 @@ export default function Home() {
 
 function Item({ item }) {
 	return (
-		<Paper className='flex justify-center'>
-			<Image src={item.path} alt='Image' width={200} height={200} />
-		</Paper>
+		<div className="flex justify-center">
+      <Image src={item.path} className="object-fill m-2 w-full h-full lg:max-h-80 " alt='Image' width={200} height={200} />
+    </div>
+			
+		
 	);
 }

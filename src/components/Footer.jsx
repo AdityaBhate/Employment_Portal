@@ -6,7 +6,7 @@ function Footer() {
 	return (
 		<>
 			<>
-				<div className='flex flex-row justify-between p-5 my-5 bg-slate-200'>
+				<div className='flex flex-row justify-between p-5 mt-5 bg-slate-200'>
 					<div className='flex-1 hidden sm:block'>
 						<Link href={"/"}>
 							<Image src='/emp-logo.png' alt='logo' width={200} height={200} />
