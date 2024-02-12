@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer";
+// import { AuthProvider } from "../providers/auth-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
 			<body className={inter.className}>
 				<Navbar />
 				{children}
-				<Footer/>
+				<Footer />
 				<Toaster position='top-center' />
 			</body>
 		</html>

@@ -29,11 +29,9 @@ function LabourRegister() {
 	const [accountName, setAccountName] = useState("");
 	const [ifscCode, setIfscCode] = useState("");
 	const [accountNumber, setAccountNumber] = useState("");
+	const [brokerCode, setBrokerCode] = useState("");
 
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [message, setMessage] = useState("");
 	const [data, setData] = useState([]);
 
 	const validateForm = () => {
@@ -350,9 +348,25 @@ function LabourRegister() {
 							/>
 						</Grid>
 					</Grid>
+					<div className='mt-6 mb-4'>
+						<Chip label='Broker Code (Optional)' />
+					</div>
+					<Grid className='m-2 mx-4' container spacing={2}>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								className='w-[90%]'
+								required
+								label='Broker Code'
+								placeholder='Enter Broker Code'
+								variant='outlined'
+								value={brokerCode}
+								onChange={(e) => setBrokerCode(e.target.value)}
+							/>
+						</Grid>
+					</Grid>
 					<div className='flex items-center justify-center mx-4 my-6 w-full'>
 						<Button
-							className='bg-green-400 text-black w-[90%]'
+							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
 							variant='contained'
 							color='success'
 							disabled={loading}

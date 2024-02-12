@@ -35,10 +35,10 @@ export default function Home() {
 
 	return (
 		<>
-			<div className='flex flex-col min-h-screen'>
+			<div className='flex flex-col min-h-screen '>
 				<div className='flex-grow'>
 					<div className='m-4'>
-						<Carousel className="">
+						<Carousel className=''>
 							{items.map((item, i) => (
 								<Item key={i} item={item} />
 							))}
@@ -46,7 +46,7 @@ export default function Home() {
 					</div>
 
 					<div className='text-center'>
-						<h2 className='text-2xl text-black font-semibold'>
+						<h2 className='text-4xl text-black font-semibold'>
 							प्रवासी मजदूर कल्याण सेवा
 						</h2>
 					</div>
@@ -58,10 +58,14 @@ export default function Home() {
 
 function Item({ item }) {
 	return (
-		<div className="flex justify-center">
-      <Image src={item.path} className="object-fill m-2 w-full h-full lg:max-h-80 " alt='Image' width={200} height={200} />
-    </div>
-			
-		
+		<div className='flex justify-center'>
+			<Image
+				src={item.path}
+				className='object-fill m-2 w-full h-full lg:max-h-96 '
+				alt='Image'
+				width={200}
+				height={200}
+			/>
+		</div>
 	);
 }

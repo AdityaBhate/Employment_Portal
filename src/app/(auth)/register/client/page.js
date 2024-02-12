@@ -2,8 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { TextField, Grid, Paper, Chip, Button } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function ClientRegister() {
+	const router = useRouter();
+
 	const [clientName, setClientName] = useState("");
 	const [fatherName, setFatherName] = useState("");
 	const [companyName, setCompanyName] = useState("");
@@ -11,14 +17,88 @@ function ClientRegister() {
 	const [mobileNumber, setMobileNumber] = useState("");
 	const [emailId, setEmailId] = useState("");
 	const [residentialAddress, setResidentialAddress] = useState("");
+	const [password, setPassword] = useState("");
 
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [message, setMessage] = useState("");
 	const [data, setData] = useState([]);
 
-	useEffect(() => {}, []);
+	const confirmPasswordCheck = (password, confirmPassword) => {
+		if (password.length < 8 || confirmPassword.length < 8) {
+			toast.error("Password must be at least 8 characters long.");
+			return false;
+		}
+
+		if (password !== confirmPassword) {
+			toast.error("Password and Confirm Password do not match.");
+			setConfirmPassword("");
+			setPassword("");
+			return false;
+		}
+
+		return true;
+	};
+
+	const validateForm = () => {
+		if (clientName.trim() === "") {
+			return false;
+		}
+		if (fatherName.trim() === "") {
+			return false;
+		}
+		if (companyName.trim() === "") {
+			return false;
+		}
+		if (labourCategory.trim() === "") {
+			return false;
+		}
+		if (mobileNumber.trim() === "") {
+			return false;
+		}
+		if (emailId.trim() === "") {
+			return false;
+		}
+		if (residentialAddress.trim() === "") {
+			return false;
+		}
+
+		return true;
+	};
+
+	const handleSubmit = () => {
+		setLoading(true);
+		if (validateForm()) {
+			if (confirmPasswordCheck(confirmPassword, password)) {
+				const payload = {
+					clientName,
+					fatherName,
+					emailId,
+					password,
+					mobileNumber,
+					residentialAddress,
+					companyName,
+					labourCategory,
+				};
+				axios
+					.post("/api/auth/register/client", payload)
+					.then((response) => {
+						setData(response.data);
+						console.log(response);
+						setLoading(false);
+						toast.success("Client registered successfully!");
+						router.push("/login/client");
+					})
+					.catch((error) => {
+						setLoading(false);
+						toast.error(error.message);
+					});
+			}
+		} else {
+			setLoading(false);
+			toast.error("Please fill the form correctly!");
+		}
+		setLoading(false);
+	};
 
 	return (
 		<>
@@ -115,13 +195,41 @@ function ClientRegister() {
 								variant='outlined'
 							/>
 						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								className='w-[90%]'
+								required
+								type='password'
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								label='Password'
+								placeholder='Set your Password'
+								variant='outlined'
+							/>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								className='w-[90%]'
+								required
+								type='password'
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								label='Confirm Your Password'
+								placeholder='Confirm your Password'
+								variant='outlined'
+							/>
+						</Grid>
 					</Grid>
 					<div className='flex justify-center my-3'>
 						<Button
-							className='bg-green-400 text-black'
+							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
 							variant='contained'
-							color='success'>
-							Submit
+							// color='success'
+							disabled={loading}
+							onClick={() => {
+								handleSubmit();
+							}}>
+							{loading ? <CircularProgress /> : "Submit"}
 						</Button>
 					</div>
 				</div>
