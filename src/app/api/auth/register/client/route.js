@@ -1,4 +1,4 @@
-// import { db } from "../../../../../utils/db";
+import { db } from "../../../../../utils/db";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -64,34 +64,35 @@ export async function POST(req) {
 	const sanitizedPassword = sanitize(password);
 
 	//! check if user already exists
+	const userExists = await db.client.findFirst({
+		where: {
+			emailId: sanitizedEmail,
+		},
+	});
+	if (userExists) {
+		return NextResponse.json({
+			status: "failed",
+			error: "User already exists",
+		});
+	}
 
 	try {
 		//! Create User
-		// const client = await db.create({
-		// 	data: {
-		// 		name: sanitizedName,
-		// 		fatherName: sanitizedFatherName,
-		// 		email: sanitizedEmail,
-		// 		companyName: sanitizedCompanyName,
-		// 		mobileNumber: sanitizedMobileNumber,
-		// 		address: sanitizedAddress,
-		// 		labourCategory: sanitizedLabourCategory,
-		// 	},
-		// });
-
-		const client = {
-			name: sanitizedName,
-			fatherName: sanitizedFatherName,
-			email: sanitizedEmail,
-			companyName: sanitizedCompanyName,
-			mobileNumber: sanitizedMobileNumber,
-			address: sanitizedAddress,
-			labourCategory: sanitizedLabourCategory,
-			password: sanitizedPassword,
-		};
+		const client = await db.client.create({
+			data: {
+				clientName: sanitizedName,
+				emailId: sanitizedEmail,
+				fatherName: sanitizedFatherName,
+				companyName: sanitizedCompanyName,
+				mobileNumber: sanitizedMobileNumber,
+				residentialAddress: sanitizedAddress,
+				labourCategory: sanitizedLabourCategory,
+				password: sanitizedPassword,
+			},
+		});
 
 		cookies().set("pmks-client-session", "loggedin", {
-			// httpOnly: true,
+			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
 			maxAge: 60 * 60 * 24 * 7,
 			path: "/",
@@ -100,7 +101,7 @@ export async function POST(req) {
 		return NextResponse.json({ status: "success", data: client });
 	} catch (error) {
 		console.error("Error registering client:", error);
-		return NextResponse.json({ error: error });
+		return NextResponse.json({ status: "failed", error: error });
 	}
 }
 
