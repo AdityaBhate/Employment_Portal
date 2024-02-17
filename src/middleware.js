@@ -10,6 +10,12 @@ export default function middleware(request) {
 		return NextResponse.redirect(new URL("/login/client", request.url));
 	}
 	if (!labourSessionCookie && request.nextUrl.pathname.startsWith("/labour")) {
-		return NextResponse / redirect(new URL("/login/labour", request.url));
+		return NextResponse.redirect(new URL("/login/labour", request.url));
+	}
+	if (!labourSessionCookie && request.nextUrl.pathname.startsWith("/admin")) {
+		return NextResponse.redirect(new URL("/home", request.url));
+	}
+	if (!clientSessionCookie && request.nextUrl.pathname.startsWith("/admin")) {
+		return NextResponse.redirect(new URL("/home", request.url));
 	}
 }

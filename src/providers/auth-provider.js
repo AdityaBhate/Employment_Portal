@@ -1,22 +1,61 @@
-"use client";
-
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { useRouter, usePathname } from "next/navigation";
+import { db } from "../utils/db";
 
-export function AuthProvider({ children }) {
-	const router = useRouter();
-	const pathname = usePathname();
-
+export async function AuthProvider({ children }) {
 	const cookieStore = cookies();
-	const sessionCookie = cookieStore.get("pmks-client-session");
-	if (sessionCookie) {
-		return <>{children}</>;
-	} else {
-		if (pathname === "/login/client" || pathname === "/register/client") {
+	const clientSessionCookie = cookieStore.get("pmks-client-session");
+	const labourSessionCookie = cookieStore.get("pmks-labour-session");
+	if (clientSessionCookie) {
+		let user = await verifyUser(clientSessionCookie.value, "client");
+		console.log(user);
+		if (user) {
 			return <>{children}</>;
 		} else {
-			router.push("/login/client");
+			console.log("invalid user");
+			return redirect("/login/client");
 		}
-		return <>No Access allowed!</>;
+	} else {
+		console.log("No user");
+		return redirect("/login/client");
+	}
+	if (labourSessionCookie) {
 	}
 }
+
+const verifyUser = async (id, type) => {
+	try {
+		if (type === "client") {
+			const user = await db.client.findFirst({
+				where: {
+					id: id,
+				},
+			});
+			if (user) {
+				return user;
+			}
+		} else {
+			return null;
+		}
+	} catch (error) {
+		console.log("[Auth provider]: " + error);
+		return null;
+	}
+	try {
+		if (type === "labour") {
+			const user = await db.labour.findFirst({
+				where: {
+					id: id,
+				},
+			});
+			if (user) {
+				return user;
+			}
+		} else {
+			return null;
+		}
+	} catch (error) {
+		console.log("[Auth provider]: " + error);
+		return null;
+	}
+};

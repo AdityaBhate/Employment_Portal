@@ -91,7 +91,7 @@ export async function POST(req) {
 			},
 		});
 
-		cookies().set("pmks-client-session", "loggedin", {
+		cookies().set("pmks-client-session", client.id, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
 			maxAge: 60 * 60 * 24 * 7,
@@ -114,7 +114,3 @@ function sanitize(text) {
 		.replace(/'/g, "&#039;");
 	return escapedText;
 }
-
-export const GET = async (req, res) => {
-	return NextResponse.json({ route: "auth/register/client" });
-};

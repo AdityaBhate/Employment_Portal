@@ -78,7 +78,12 @@ export async function POST(req) {
 				referedBy,
 			},
 		});
-
+		cookies().set("pmks-labour-session", labour.id, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			maxAge: 60 * 60 * 24 * 7,
+			path: "/",
+		});
 		return NextResponse.json({ status: "success", data: labour });
 	} catch (error) {
 		console.error("Error registering labour:", error);
