@@ -5,7 +5,7 @@ import { TextField, Grid, Chip, Button } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 function ClientLogin() {
 	const router = useRouter();
@@ -30,6 +30,7 @@ function ClientLogin() {
 		setLoading(true);
 		if (validateForm()) {
 			console.log("Form is valid");
+			redirect('/request-labour');
 		} else {
 			setLoading(false);
 			toast.error("Please fill the form correctly!");
