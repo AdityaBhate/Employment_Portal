@@ -1,6 +1,7 @@
 import { db } from "../../../../../utils/db";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import bcrypt from "bcrypt";
 
 export async function POST(req) {
 	const {
@@ -71,13 +72,13 @@ export async function POST(req) {
 	});
 	if (userExists) {
 		return NextResponse.json({
-			status: "failed",
 			error: "User already exists",
 		});
 	}
 
 	try {
-		//! Create User
+		const hashedPassword = await bcrypt.hash(sanitizedPassword, 10);
+
 		const client = await db.client.create({
 			data: {
 				clientName: sanitizedName,
@@ -87,7 +88,7 @@ export async function POST(req) {
 				mobileNumber: sanitizedMobileNumber,
 				residentialAddress: sanitizedAddress,
 				labourCategory: sanitizedLabourCategory,
-				password: sanitizedPassword,
+				password: hashedPassword,
 			},
 		});
 
@@ -98,10 +99,10 @@ export async function POST(req) {
 			path: "/",
 		});
 
-		return NextResponse.json({ status: "success", data: client });
+		return NextResponse.json({ data: client });
 	} catch (error) {
 		console.error("Error registering client:", error);
-		return NextResponse.json({ status: "failed", error: error });
+		return NextResponse.json({ error: error });
 	}
 }
 

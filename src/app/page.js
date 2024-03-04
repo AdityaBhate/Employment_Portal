@@ -10,6 +10,7 @@ import THREE from "../assets/Carousel3.jpeg";
 import FOUR from "../assets/Carousel4.jpeg";
 import FIVE from "../assets/Carousel5.jpeg";
 import SIX from "../assets/Carousel6.jpeg";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
 	var items = [
@@ -35,6 +36,7 @@ export default function Home() {
 
 	return (
 		<>
+			<Navbar />
 			<div className='flex flex-col min-h-screen '>
 				<div className='flex-grow'>
 					<div className='m-4'>
@@ -52,6 +54,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 }

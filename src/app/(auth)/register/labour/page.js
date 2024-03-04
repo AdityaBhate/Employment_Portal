@@ -1,17 +1,22 @@
 "use client";
 
-import { TextField, Grid, Paper, Chip, Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { TextField, Grid, Chip, Button } from "@mui/material";
+import React, { useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { indianStates } from "../../../../utils/states";
+import { labourCategory } from "../../../../utils/labour-category";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 function LabourRegister() {
+	const router = useRouter();
+
 	const [labourName, setLabourName] = useState("");
 	const [fatherName, setFatherName] = useState("");
 	const [gender, setGender] = useState("");
@@ -22,14 +27,14 @@ function LabourRegister() {
 	const [districtName, setDistrictName] = useState("");
 	const [residentialAddress, setResidentialAddress] = useState("");
 	const [education, setEducation] = useState("");
-	const [workEfficiency, setWorkEfficiency] = useState("");
+	const [labourType, setLabourType] = useState("");
 	const [state, setState] = useState("");
 	const [bankName, setBankName] = useState("");
 	const [branchName, setBranchName] = useState("");
 	const [accountName, setAccountName] = useState("");
 	const [ifscCode, setIfscCode] = useState("");
 	const [accountNumber, setAccountNumber] = useState("");
-	const [brokerCode, setBrokerCode] = useState("");
+	const [referedBy, setReferedBy] = useState("");
 
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
@@ -71,7 +76,7 @@ function LabourRegister() {
 		if (education === "") {
 			isValid = false;
 		}
-		if (workEfficiency === "") {
+		if (labourType === "") {
 			isValid = false;
 		}
 		if (bankName === "") {
@@ -89,7 +94,6 @@ function LabourRegister() {
 		if (accountNumber === "") {
 			isValid = false;
 		}
-
 		return isValid;
 	};
 
@@ -107,13 +111,14 @@ function LabourRegister() {
 				districtName,
 				residentialAddress,
 				education,
-				workEfficiency,
+				labourType,
 				state,
 				bankName,
 				branchName,
 				accountName,
 				ifscCode,
 				accountNumber,
+				referedBy,
 			};
 			axios
 				.post("/api/auth/register/labour", payload)
@@ -121,6 +126,7 @@ function LabourRegister() {
 					setData(response.data);
 					setLoading(false);
 					toast.success("Labour registered successfully!");
+					router.push("/labour");
 				})
 				.catch((error) => {
 					setLoading(false);
@@ -259,15 +265,23 @@ function LabourRegister() {
 							/>
 						</Grid>
 						<Grid item xs={12} sm={4}>
-							<TextField
-								className='w-[90%]'
-								required
-								label='Labour Work Efficiency'
-								placeholder='Work Efficiency'
-								variant='outlined'
-								value={workEfficiency}
-								onChange={(e) => setWorkEfficiency(e.target.value)}
-							/>
+							<FormControl className='w-[90%]'>
+								<InputLabel id='demo-simple-select-label'>
+									Labour Type
+								</InputLabel>
+								<Select
+									labelId='demo-simple-select-label'
+									id='demo-simple-select'
+									label='Labour Type'
+									value={labourType}
+									onChange={(e) => setLabourType(e.target.value)}>
+									{labourCategory?.map((type) => (
+										<MenuItem key={type} value={type}>
+											{type}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<FormControl className='w-[90%]'>
@@ -278,7 +292,7 @@ function LabourRegister() {
 									label='State'
 									value={state}
 									onChange={(e) => setState(e.target.value)}>
-									{indianStates.map((state) => (
+									{indianStates?.map((state) => (
 										<MenuItem key={state} value={state}>
 											{state}
 										</MenuItem>
@@ -355,12 +369,11 @@ function LabourRegister() {
 						<Grid item xs={12} sm={4}>
 							<TextField
 								className='w-[90%]'
-								required
-								label='Broker Code'
-								placeholder='Enter Broker Code'
+								label='Referral Broker Code'
+								placeholder='Enter Referred Broker Code'
 								variant='outlined'
-								value={brokerCode}
-								onChange={(e) => setBrokerCode(e.target.value)}
+								value={referedBy}
+								onChange={(e) => setReferedBy(e.target.value)}
 							/>
 						</Grid>
 					</Grid>

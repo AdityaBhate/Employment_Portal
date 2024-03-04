@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { TextField, Grid, Paper, Chip, Button } from "@mui/material";
+import React, { useState } from "react";
+import { TextField, Grid, Chip, Button } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -83,10 +83,9 @@ function ClientRegister() {
 					.post("/api/auth/register/client", payload)
 					.then((response) => {
 						setData(response.data);
-						console.log(response);
 						setLoading(false);
 						toast.success("Client registered successfully!");
-						router.push("/login/client");
+						router.push("/client");
 					})
 					.catch((error) => {
 						setLoading(false);

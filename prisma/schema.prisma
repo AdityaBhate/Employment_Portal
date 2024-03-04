@@ -15,18 +15,18 @@ model Labour {
   dob                String
   caste              String
   mobileNumber       String
-  aadharNumber       String
+  aadharNumber       String  @unique
   districtName       String
   residentialAddress String
   education          String
-  workEfficiency     String
+  labourType         String
   state              String
   bankName           String
   branchName         String
   accountName        String
   ifscCode           String
   accountNumber      String
-  brokerCode         String  @default("0")
+  brokerCode         String  @unique @default("")
   isBroker           Boolean @default(false)
   referedBy          String
 }
@@ -38,13 +38,21 @@ model Client {
   companyName        String
   labourCategory     String
   mobileNumber       String
-  emailId            String
+  emailId            String @unique
   residentialAddress String
   password           String
 }
 
 model Requests {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  comment String
-  postId  String @db.ObjectId
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  comment  String
+  name     String
+  mobileNo String
+  clientID String @db.ObjectId
+}
+
+model Admin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  password String
 }

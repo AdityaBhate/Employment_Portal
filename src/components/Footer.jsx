@@ -5,7 +5,9 @@ import Image from "next/image";
 function Footer() {
 	return (
 		<>
-			<div className='flex flex-row justify-between p-5 mt-5 bg-gray-200'>
+			<div
+				id='footer'
+				className='flex flex-row justify-between p-5 mt-5 bg-gray-200'>
 				<div className='flex-1 hidden sm:block'>
 					<Link href={"/"}>
 						<Image
@@ -56,10 +58,15 @@ function Footer() {
 						<h4 className='text-black font-semibold text-lg'>
 							Want to Hire Labours?
 						</h4>
-						<div className='text-right my-4'>
+						<div className='flex flex-col items-end gap-2 text-right my-4'>
 							<Link className='my-2' href='/register/client'>
 								<span className='bg-orange-500 text-white px-3 py-1 font-light rounded-xl'>
 									Register as a client
+								</span>
+							</Link>
+							<Link className='my-2' href='/login/client'>
+								<span className='bg-orange-500 text-white px-3 py-1 font-light rounded-xl'>
+									Login as a Client
 								</span>
 							</Link>
 						</div>

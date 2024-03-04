@@ -1,137 +1,74 @@
-//! Request labour page
 "use client";
 
-import { Button, TextField } from "@mui/material";
-import Image from "next/image";
-import React, { useEffect } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import labourCategory from "../../../utils/labour-category";
-import indianStates from "../../../utils/states";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { TextField, Button } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import toast from "react-hot-toast";
 
 function RequestLabourPage() {
-  return (
-    <>
-      <div className="items-center h-full">
-        <div className="shadow-md mx-4 md:mx-28 items-center p-2 rounded">
-          <div className="mx-4 md:mx-44">
-            <div className="flex flex-col md:flex-row justify-between m-4">
-              <h3 className="text-black font-semibold text-xl mb-2 md:mb-0">
-                Request Labours
-              </h3>
-              <Image
-                src="/emp-logo.png"
-                alt="logo"
-                width={70}
-                height={70}
-                className="rounded-xl"
-              />
-            </div>
-            <p className="m-4">Request Labour for your work</p>
-            <div className="bg-gray-200 rounded">
-              <div className="p-4">
-                <div className="flex flex-col md:flex-row gap-4 m-2">
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    //   value={clientName}
-                    //   onChange={(e) => setClientName(e.target.value)}
-                    label="Number of Labours"
-                    type="number"
-                    placeholder="Enter number of labours"
-                    variant="outlined"
-                  />
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    //   value={clientName}
-                    //   onChange={(e) => setClientName(e.target.value)}
-                    label="Mobile Number"
-                    placeholder="Enter mobile number"
-                    type="number"
-                    variant="outlined"
-                  />
-                </div>
-                <div className="flex flex-col md:flex-row gap-4 m-2">
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                      Type of Labours
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      //   value={age}
-                      label="Type of Labours"
-                      //   onChange={handleChange}
-                    >
-                      {labourCategory.map((category, i) => {
-                        return (
-                          <MenuItem key={i} value={category}>
-                            {category}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">State</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      //   value={age}
-                      label="State"
-                      //   onChange={handleChange}
-                    >
-                      {indianStates.map((state, i) => {
-                        return (
-                          <MenuItem key={i} value={state}>
-                            {state}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="flex flex-col md:flex-row gap-4 m-2">
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    //   value={clientName}
-                    //   onChange={(e) => setClientName(e.target.value)}
-                    label="Address"
-					multiline
-					maxRows={4}
-                    placeholder="Enter your Address"
-                    variant="outlined"
-                  />
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    //   value={clientName}
-                    //   onChange={(e) => setClientName(e.target.value)}
-                    label="When you want"
-					type="date"
-					multiline
-					maxRows={4}
-                    placeholder="Enter Date"
-                    variant="outlined"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text-center m-4">
-              <button className="bg-orange-400 hover:bg-orange-500 text-black px-6 py-2 rounded-3xl font-semibold">
-                Request
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+	const [loading, setLoading] = useState(false);
+	const [comment, setComment] = useState("");
+
+	const handleSubmit = async () => {
+		try {
+			setLoading(true);
+			const response = await axios.post("/api/dashboard/create-requests", {
+				comment,
+			});
+			if (response.status === 200) {
+				toast.success("Request submitted successfully");
+				setComment("");
+			} else {
+				toast.error("Failed to submit request");
+			}
+			setLoading(false);
+		} catch (error) {
+			toast.error("Failed to submit request");
+		}
+	};
+
+	return (
+		<>
+			<div className='flex items-center justify-center h-full'>
+				<div className='shadow-md py-6 px-4 w-[85%]'>
+					<div className='mb-4 flex flex-col items-start justify-center gap-2'>
+						<span className='text-white font-semibold text-xl p-2 bg-black rounded'>
+							Requests Labours
+						</span>
+						<span>
+							Please specify the quantity, type, and reason for requiring labor
+							in the comment box.
+						</span>
+					</div>
+
+					<div className='flex flex-col items-center justify-between gap-4'>
+						<TextField
+							className='w-[70%]'
+							required
+							multiline
+							rows={3}
+							value={comment}
+							onChange={(e) => setComment(e.target.value)}
+							label='Type your Request'
+							placeholder='Enter your Request here...'
+							variant='outlined'
+						/>
+					</div>
+
+					<div className='flex justify-center my-3'>
+						<Button
+							className='bg-orange-400 text-black w-[70%] hover:bg-orange-600/50'
+							variant='contained'
+							disabled={loading}
+							onClick={handleSubmit}>
+							{loading ? <CircularProgress /> : "Submit"}
+						</Button>
+					</div>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default RequestLabourPage;

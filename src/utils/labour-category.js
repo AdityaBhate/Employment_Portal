@@ -1,4 +1,4 @@
-const labourCategory = [
+export const labourCategory = [
 	"TEACHER",
 	"FARMER",
 	"NURSE",
@@ -41,5 +41,3 @@ const labourCategory = [
 	"FISHERMAN",
 	"OTHER",
 ];
-
-export default labourCategory ;

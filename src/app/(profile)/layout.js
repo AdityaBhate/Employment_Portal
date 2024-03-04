@@ -1,21 +1,14 @@
-// import React from "react";
-// import { AuthProvider } from "../../providers/auth-provider";
-
-// function layout({ children }) {
-// 	return (
-// 		<div>
-// 			<AuthProvider>{children}</AuthProvider>
-// 		</div>
-// 	);
-// }
-
-// export default layout;
 import React from "react";
+import { AuthProvider } from "../../providers/auth-provider";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 function layout({ children }) {
 	return (
 		<div>
-			{children}
+			<Navbar />
+			<AuthProvider>{children}</AuthProvider>
+			<Footer />
 		</div>
 	);
 }

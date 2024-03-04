@@ -5,7 +5,7 @@ import { TextField, Grid, Chip, Button } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function ClientLogin() {
 	const router = useRouter();
@@ -22,15 +22,37 @@ function ClientLogin() {
 		if (password.trim() === "") {
 			return false;
 		}
-
 		return true;
 	};
 
 	const handleSubmit = () => {
 		setLoading(true);
 		if (validateForm()) {
-			console.log("Form is valid");
-			redirect('/request-labour');
+			const payload = {
+				emailId,
+				password,
+			};
+			axios
+				.post("/api/auth/login/client", payload)
+				.then((response) => {
+					if (response.status === 200 && !response?.data.error) {
+						// Check status and error
+						setLoading(false);
+						toast.success("Client Logged in successfully!");
+						router.push("/client");
+					} else {
+						setLoading(false);
+						if (response.status === 401) {
+							toast.error("Invalid email or password");
+						} else {
+							toast.error("Error Logging In");
+						}
+					}
+				})
+				.catch((error) => {
+					setLoading(false);
+					toast.error(error.message);
+				});
 		} else {
 			setLoading(false);
 			toast.error("Please fill the form correctly!");
@@ -57,7 +79,7 @@ function ClientLogin() {
 							value={emailId}
 							onChange={(e) => setEmailId(e.target.value)}
 							label='Email ID'
-							placeholder='Enter your Email ID'
+							placeholder='Enter your Registered Email ID'
 							variant='outlined'
 						/>
 
@@ -68,7 +90,7 @@ function ClientLogin() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							label='Password'
-							placeholder='Set your Password'
+							placeholder='Enter your Registered Password'
 							variant='outlined'
 						/>
 					</div>

@@ -1,102 +1,189 @@
-//! Labour profile page
-//! Print button here!
-//! if broker, show broker page button
-"use client";
-import React, { useState } from "react";
+import React from "react";
+import { cookies } from "next/headers";
+import { db } from "../../../utils/db";
+import moment from "moment";
 
-function LabourPage() {
-  const [profileDetails, setProfileDetails] = useState({
-    personalDetails: {
-      name: "Vinod",
-      fatherName: "Manoj",
-      gender: "male",
-      DOB: "30/02/2024",
-      caste: "Hindu",
-      mobile: "9876543210",
-      aadharNumber: "1234567899",
-      labourType: "Carpenter",
-      Address: "Room Xyz, Xyz Apt, Xyz locality",
-      state: "Maharashtra",
-    },
-    bankDetails: {
-      bankName: "State Bank of India",
-      branchName: "Pune",
-      accountName: "Vinod Kumar",
-      accountNumber: "123456789",
-      ifscCode: "SBIN0002356",
-    },
-  });
-  return (
-    <>
-      <div className="items-center h-full">
-        <div className="shadow-md mx-4 md:mx-28 items-center p-2 rounded">
-          <div className="mx-4 md:mx-44">
-            <div className="flex flex-col md:flex-row justify-between m-4">
-              <h3 className="text-black font-semibold text-xl mb-2 md:mb-0">
-                Profile:
-              </h3>
-              <Image
-                src="/emp-logo.png"
-                alt="logo"
-                width={70}
-                height={70}
-                className="rounded-xl"
-              />
-            </div>
-            <p className="m-4">Personal Details</p>
-            <div className="bg-gray-200 rounded">
-              <div className="p-4">
-                <div className="flex flex-col md:flex-row gap-4 m-2">
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    value={profileDetails?.personalDetails?.name}
-                    onChange={(e) => {
-                      setProfileDetails({
-                        ...profileDetails.personalDetails,
-                        name: e.target.value,
-                      });
-                    }}
-                    label="Name"
-                    placeholder="Enter Name"
-                    variant="outlined"
-                  />
-                  <TextField
-                    className="w-full md:w-[90%]"
-                    required
-                    value={profileDetails?.personalDetails?.fatherName}
-                    onChange={(e) => {
-                      setProfileDetails({
-                        ...profileDetails.personalDetails,
-                        fatherName: e.target.value,
-                      });
-                    }}
-                    label="Father Name"
-                    placeholder="Enter father's name"
-                    variant="outlined"
-                  />
-                </div>
-              </div>
-            </div>
-            <p className="m-4">Bank Details</p>
-            <div className="bg-gray-200 rounded my-4">
-              <div className="p-4">
-                <div className="flex flex-col md:flex-row gap-4 m-2">
-                  
-                  {/* DETAILS HERE  */}
-                </div>
-              </div>
-            </div>
-            <div className="text-center m-4">
-              <button className="bg-orange-400 hover:bg-orange-500 text-black px-6 py-2 rounded-3xl font-semibold">
-                Print
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+const getData = async (id) => {
+	const user = await db.labour.findFirst({
+		where: {
+			id: id,
+		},
+	});
+	return user;
+};
+
+async function LabourPage() {
+	const cookieStore = cookies();
+	const labourSessionCookie = cookieStore.get("pmks-labour-session");
+
+	const user = await getData(labourSessionCookie.value);
+
+	return (
+		<>
+			<div className='container mx-auto mt-10 p-4'>
+				<div className='mb-4 text-left'>
+					<h1 className='text-3xl text-orange-600 font-bold mb-4'>
+						Labour Profile
+					</h1>
+				</div>
+				<div className='bg-white border-2 shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+					<h1 className='text-2xl text-orange-600 font-bold mb-4'>
+						Personal Details
+					</h1>
+					<div className='grid grid-cols-2 gap-4 justify-center'>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Labour Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.labourName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Father Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.fatherName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Gender
+							</label>
+							<p className='text-gray-700 text-base'>{user.gender}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Date of Birth
+							</label>
+							<p className='text-gray-700 text-base'>
+								{moment(user.dob).format("MM/DD/YYYY")}
+							</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Caste
+							</label>
+							<p className='text-gray-700 text-base'>{user.caste}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Mobile Number
+							</label>
+							<p className='text-gray-700 text-base'>{user.mobileNumber}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Aadhar Number
+							</label>
+							<p className='text-gray-700 text-base'>{user.aadharNumber}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Residential Address
+							</label>
+							<p className='text-gray-700 text-base'>
+								{user.residentialAddress}
+							</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								District Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.districtName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								State
+							</label>
+							<p className='text-gray-700 text-base'>{user.state}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Education
+							</label>
+							<p className='text-gray-700 text-base'>{user.education}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Labour Type
+							</label>
+							<p className='text-gray-700 text-base'>{user.labourType}</p>
+						</div>
+					</div>
+
+					{/* bank details */}
+					<hr className='mt-8 mb-4' />
+					<h1 className='text-2xl text-orange-600 font-bold mb-4 '>
+						Bank Details
+					</h1>
+					<div className='grid grid-cols-2 gap-4 justify-center'>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Bank Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.bankName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Branch Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.branchName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Account Name
+							</label>
+							<p className='text-gray-700 text-base'>{user.accountName}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								IFSC Code
+							</label>
+							<p className='text-gray-700 text-base'>{user.ifscCode}</p>
+						</div>
+						<div className='col-span-2 md:col-span-1'>
+							<label className='block text-gray-700 text-base font-bold mb-1'>
+								Account Number
+							</label>
+							<p className='text-gray-700 text-base'>{user.accountNumber}</p>
+						</div>
+					</div>
+					{/* broker details */}
+					{user.isBroker && (
+						<>
+							<hr className='mt-8 mb-4' />
+							<h1 className='text-2xl text-orange-600 font-bold mb-4 '>
+								Broker Details
+							</h1>
+							<div className='grid grid-cols-2 gap-4 justify-center'>
+								<div className='col-span-2 md:col-span-1'>
+									<label className='block text-gray-700 text-base font-bold mb-1'>
+										BrokerCode
+									</label>
+									<p className='text-gray-700 text-base'>{user.brokerCode}</p>
+								</div>
+								<div className='col-span-2 md:col-span-1'>
+									<button className='px-4 py-2 bg-orange-400 color-white rounded-md'>
+										See All Referrals
+									</button>
+								</div>
+							</div>
+						</>
+					)}
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default LabourPage;
+{
+	/* <div className='flex items-center justify-center mt-6 space-x-4'>
+						<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+							Print
+						</button>
+						{user.isBroker && (
+							<button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
+								Broker Page
+							</button>
+						)}
+					</div> */
+}

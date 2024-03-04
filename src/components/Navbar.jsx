@@ -4,7 +4,9 @@ import Image from "next/image";
 
 function Navbar() {
 	return (
-		<nav className='flex px-4 py-2 mb-4 items-center  justify-between  bg-gray-200'>
+		<nav
+			id='nav'
+			className='flex px-4 py-2 mb-4 items-center  justify-between  bg-gray-200'>
 			<div>
 				<Link href={"/"}>
 					<Image src='/emp-logo.png' alt='logo' width={65} height={65} />
@@ -15,8 +17,8 @@ function Navbar() {
 					<li>
 						<Link
 							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
-							href='/about'>
-							About
+							href='/login/labour'>
+							Login
 						</Link>
 					</li>
 					<li>

@@ -14,15 +14,13 @@ export async function POST(req) {
 		districtName,
 		residentialAddress,
 		education,
-		workEfficiency,
+		labourType,
 		state,
 		bankName,
 		branchName,
 		accountName,
 		ifscCode,
 		accountNumber,
-		brokerCode,
-		isBroker,
 		referedBy,
 	} = await req.json();
 
@@ -40,6 +38,10 @@ export async function POST(req) {
 		errors.push("Mobile number is required.");
 	}
 
+	if (!aadharNumber) {
+		errors.push("aadhar number is required.");
+	}
+
 	if (!residentialAddress) {
 		errors.push("Address is required.");
 	}
@@ -53,29 +55,42 @@ export async function POST(req) {
 	const sanitizedMobileNumber = sanitize(mobileNumber);
 	const sanitizedResidentialAddress = sanitize(residentialAddress);
 
+	const isLabourExist = await db.labour.findUnique({
+		where: { aadharNumber: aadharNumber },
+	});
+
+	if (isLabourExist) {
+		return NextResponse.json(
+			{
+				error: "Labour already exist",
+			},
+			{
+				status: 401,
+			}
+		);
+	}
+
 	try {
 		const labour = await db.labour.create({
 			data: {
 				labourName: sanitizedLabourName,
 				fatherName: sanitizedFatherName,
-				gender,
-				dob,
-				caste,
+				gender: gender,
+				dob: dob,
+				caste: caste,
 				mobileNumber: sanitizedMobileNumber,
-				aadharNumber,
-				districtName,
+				aadharNumber: aadharNumber,
+				districtName: districtName,
 				residentialAddress: sanitizedResidentialAddress,
-				education,
-				workEfficiency,
-				state,
-				bankName,
-				branchName,
-				accountName,
-				ifscCode,
-				accountNumber,
-				brokerCode,
-				isBroker,
-				referedBy,
+				education: education,
+				labourType: labourType,
+				state: state,
+				bankName: bankName,
+				branchName: branchName,
+				accountName: accountName,
+				ifscCode: ifscCode,
+				accountNumber: accountNumber,
+				referedBy: referedBy,
 			},
 		});
 		cookies().set("pmks-labour-session", labour.id, {
@@ -84,10 +99,10 @@ export async function POST(req) {
 			maxAge: 60 * 60 * 24 * 7,
 			path: "/",
 		});
-		return NextResponse.json({ status: "success", data: labour });
+		return NextResponse.json({ data: labour });
 	} catch (error) {
 		console.error("Error registering labour:", error);
-		return NextResponse.json({ status: "failed", error: error });
+		return NextResponse.json({ error: error });
 	}
 }
 
