@@ -1,20 +1,26 @@
 "use client";
+
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import LabourTable from "../../../../components/LabourTable";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const LabourPage = () => {
+const LabourPage = ({ params }) => {
 	const [labours, setLabours] = useState([]);
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(false);
-
+	const code = params.id;
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
-			const response = await axios.get("/api/dashboard/labour-all");
-			setLabours(response?.data?.labours);
+			const response = await axios.get("/api/dashboard/labour");
+			const allLabours = response?.data?.labours;
+			setLabours(
+				allLabours.filter(
+					(labour) => labour.referedBy === code && labour.brokerCode !== code
+				)
+			);
 			setLoading(false);
 		};
 		fetchData();
@@ -39,7 +45,7 @@ const LabourPage = () => {
 	return (
 		<div className='p-2'>
 			<div className='flex items-center justify-between  mb-6'>
-				<h1 className='text-xl'>Labour Details</h1>
+				<h1 className='text-xl'>All Labours Referred by {code}</h1>
 				<TextField
 					label='Search by name'
 					variant='standard'

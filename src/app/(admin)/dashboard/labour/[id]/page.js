@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function LabourDetails({ params }) {
+	const router = useRouter();
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(false);
 
@@ -175,7 +177,9 @@ function LabourDetails({ params }) {
 								<p className='text-gray-700 text-base'>{user.brokerCode}</p>
 							</div>
 							<div className='col-span-2 md:col-span-1'>
-								<button className='px-4 py-2 bg-orange-400 color-white rounded-md'>
+								<button
+									onClick={() => router.push(`/broker/${code}`)}
+									className='px-4 py-2 bg-orange-400 color-white rounded-md'>
 									See All Referrals
 								</button>
 							</div>
