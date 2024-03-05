@@ -2,6 +2,7 @@ import React from "react";
 import { cookies } from "next/headers";
 import { db } from "../../../utils/db";
 import moment from "moment";
+import ReferralButton from "../../../components/ReferralButton";
 
 const getData = async (id) => {
 	const user = await db.labour.findFirst({
@@ -147,27 +148,7 @@ async function LabourPage() {
 						</div>
 					</div>
 					{/* broker details */}
-					{user.isBroker && (
-						<>
-							<hr className='mt-8 mb-4' />
-							<h1 className='text-2xl text-orange-600 font-bold mb-4 '>
-								Broker Details
-							</h1>
-							<div className='grid grid-cols-2 gap-4 justify-center'>
-								<div className='col-span-2 md:col-span-1'>
-									<label className='block text-gray-700 text-base font-bold mb-1'>
-										BrokerCode
-									</label>
-									<p className='text-gray-700 text-base'>{user.brokerCode}</p>
-								</div>
-								<div className='col-span-2 md:col-span-1'>
-									<button className='px-4 py-2 bg-orange-400 color-white rounded-md'>
-										See All Referrals
-									</button>
-								</div>
-							</div>
-						</>
-					)}
+					{user.isBroker && <ReferralButton code={user.brokerCode} />}
 				</div>
 			</div>
 		</>
@@ -175,15 +156,3 @@ async function LabourPage() {
 }
 
 export default LabourPage;
-{
-	/* <div className='flex items-center justify-center mt-6 space-x-4'>
-						<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-							Print
-						</button>
-						{user.isBroker && (
-							<button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
-								Broker Page
-							</button>
-						)}
-					</div> */
-}

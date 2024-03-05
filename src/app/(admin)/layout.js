@@ -1,11 +1,13 @@
 import AdminNavbar from "../../components/AdminNavbar";
-import { Toaster } from "react-hot-toast";
+import { AdminProvider } from "../../providers/admin-provider";
 
 export default function DashboardLayout({ children }) {
 	return (
 		<>
-			<AdminNavbar />
-			{children}
+			<AdminProvider>
+				<AdminNavbar />
+				{children}
+			</AdminProvider>
 		</>
 	);
 }

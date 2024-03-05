@@ -39,7 +39,7 @@ function AdminNavbar() {
 						<Link
 							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
 							href='/dashboard/view-requests'>
-							View Requests
+							Requests
 						</Link>
 					</li>
 				</ul>

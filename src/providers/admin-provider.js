@@ -2,57 +2,35 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { db } from "../utils/db";
 
-export async function AuthProvider({ children }) {
+export async function AdminProvider({ children }) {
 	const cookieStore = cookies();
-	const clientSessionCookie = cookieStore.get("pmks-client-session");
-	const labourSessionCookie = cookieStore.get("pmks-labour-session");
-	if (clientSessionCookie) {
-		let user = await verifyUser(clientSessionCookie.value, "client");
-		console.log(user);
+	const adminSessionCookie = cookieStore.get("pmks-admin-session");
+
+	if (adminSessionCookie) {
+		let user = await verifyAdmin(adminSessionCookie.value);
 		if (user) {
 			return <>{children}</>;
 		} else {
 			console.log("invalid user");
-			return redirect("/login/client");
+			return redirect("/dashboard-login");
 		}
 	}
-	if (labourSessionCookie) {
-		console.log(labourSessionCookie.value);
-		let user = await verifyUser(labourSessionCookie.value, "labour");
-		console.log(user);
-		if (user) {
-			return <>{children}</>;
-		} else {
-			console.log("invalid user");
-			return redirect("/login/labour");
-		}
-	}
+
 	return redirect("/");
 }
 
-const verifyUser = async (id, type) => {
+const verifyAdmin = async (id) => {
 	try {
-		if (type === "client") {
-			const user = await db.client.findFirst({
-				where: {
-					id: id,
-				},
-			});
-			if (user) {
-				return user;
-			}
-		} else if (type === "labour") {
-			const user = await db.labour.findFirst({
-				where: {
-					id: id,
-				},
-			});
-			if (user) {
-				return user;
-			}
+		const user = await db.admin.findFirst({
+			where: {
+				id: id,
+			},
+		});
+		if (user) {
+			return user;
 		}
 	} catch (error) {
-		console.log("[Auth provider]: " + error);
+		console.log("[Admin provider]: " + error);
 		return null;
 	}
 	return null;

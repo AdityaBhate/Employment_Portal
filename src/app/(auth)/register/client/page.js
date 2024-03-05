@@ -103,7 +103,7 @@ function ClientRegister() {
 		<>
 			<div className='flex items-center justify-center h-full'>
 				<div className='shadow-md py-6 px-4 w-[85%]'>
-					<span className='text-white font-semibold text-xl p-2 bg-black rounded'>
+					<span className='text-white font-semibold text-xl p-2 bg-orange-500 rounded'>
 						Client Registration Form
 					</span>
 					<div className='my-4'>
@@ -219,7 +219,7 @@ function ClientRegister() {
 							/>
 						</Grid>
 					</Grid>
-					<div className='flex justify-center my-3'>
+					<div className='flex justify-center items-center my-3'>
 						<Button
 							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
 							variant='contained'

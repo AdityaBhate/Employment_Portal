@@ -36,7 +36,7 @@ function DashboardPage() {
 			<h1 className='text-3xl font-bold text-left mb-4'>PM Kalyan Dashboard</h1>
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
 				<div className='bg-white rounded-lg shadow-md p-4 border-2 border-zinc-300'>
-					<h2 className='text-lg font-semibold mb-2'>Labor Count</h2>
+					<h2 className='text-lg font-semibold mb-2'>Labour Count</h2>
 					<p className='text-xl'>{metrics?.labours}</p>
 				</div>
 				<div className='bg-white rounded-lg shadow-md p-4 border-2 border-zinc-300'>

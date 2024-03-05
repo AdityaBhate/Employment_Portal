@@ -3,10 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req) {
 	try {
-		const allLabours = await db.labour.findMany({
-			where: { isBroker: false },
-		});
-
+		const allLabours = await db.labour.findMany();
 		if (allLabours.length > 0) {
 			return NextResponse.json({ labours: allLabours }, { status: 200 });
 		} else {

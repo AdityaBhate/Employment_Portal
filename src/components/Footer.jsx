@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import YT from "../assets/youtube.svg";
 
 function Footer() {
 	return (
@@ -38,15 +39,18 @@ function Footer() {
 								</Link>
 							</li>
 							<li className='my-2'>
-								<Link className='my-2' href='/dashboard'>
+								<Link className='my-2' href='/dashboard-login'>
 									Dashboard
 								</Link>
 							</li>
 							<li>
 								<div className='flex flex-row gap-3'>
-									<span className='p-3 bg-gray-300 rounded-full'></span>
-									<span className='p-3 bg-gray-300 rounded-full'></span>
-									<span className='p-3 bg-gray-300 rounded-full'></span>
+									<a
+										href='https://youtube.com/@pravasimajdurKalyansewa?si=GteeFK2uPyz2cVmJ'
+										target='_blank'
+										className='p-3 bg-gray-300 rounded-full'>
+										<Image src={YT} alt='youtube' width={20} height={20} />
+									</a>
 								</div>
 							</li>
 						</ul>
@@ -61,12 +65,12 @@ function Footer() {
 						<div className='flex flex-col items-end gap-2 text-right my-4'>
 							<Link className='my-2' href='/register/client'>
 								<span className='bg-orange-500 text-white px-3 py-1 font-light rounded-xl'>
-									Register as a client
+									Client Registration
 								</span>
 							</Link>
 							<Link className='my-2' href='/login/client'>
 								<span className='bg-orange-500 text-white px-3 py-1 font-light rounded-xl'>
-									Login as a Client
+									Client Login
 								</span>
 							</Link>
 						</div>
