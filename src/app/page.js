@@ -55,7 +55,7 @@ export default function Home() {
 					<div className='mt-8 flex flex-col gap-16 justify-around items-center'>
 						<div className='flex sm:flex-row  gap-16 justify-around items-center'>
 							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
-								<a href='/register/labour'>Home</a>
+								<a href='/'>Home</a>
 							</button>
 							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
 								<a href='/dashboard'>Dashboard</a>

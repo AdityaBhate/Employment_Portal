@@ -16,7 +16,7 @@ export async function AdminProvider({ children }) {
 		}
 	}
 
-	return redirect("/");
+	return redirect("/dashboard-login");
 }
 
 const verifyAdmin = async (id) => {
