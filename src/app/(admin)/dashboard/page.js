@@ -44,7 +44,7 @@ function DashboardPage() {
 					<p className='text-xl'>{metrics?.clients}</p>
 				</div>
 				<div className='bg-white rounded-lg shadow-md p-4 border-2 border-zinc-300'>
-					<h2 className='text-lg font-semibold mb-2'>Broker Count</h2>
+					<h2 className='text-lg font-semibold mb-2'>Shram Saathi Count</h2>
 					<p className='text-xl'>{metrics?.allBrokers}</p>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ function AdminNavbar() {
 		<nav
 			id='nav'
 			className='flex px-4 py-2 mb-4 items-center justify-between bg-gray-200'>
-			<div>
+			<div className='sm:block hidden'>
 				<Link href={"/"}>
 					<Image src='/emp-logo.png' alt='logo' width={65} height={65} />
 				</Link>
@@ -15,31 +15,31 @@ function AdminNavbar() {
 			<div className='flex-grow'>
 				<ul className='flex items-center justify-end gap-2'>
 					<li>
-						<Link
-							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
-							href='/dashboard/labour'>
-							Labour
+						<Link href='/dashboard/labour'>
+							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+								Labour
+							</button>
 						</Link>
 					</li>
 					<li>
-						<Link
-							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
-							href='/dashboard/broker'>
-							Broker
+						<Link href='/dashboard/broker'>
+							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+								Shram Saathi
+							</button>
 						</Link>
 					</li>
 					<li>
-						<Link
-							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
-							href='/dashboard/client'>
-							Client
+						<Link href='/dashboard/client'>
+							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+								Client
+							</button>
 						</Link>
 					</li>
 					<li>
-						<Link
-							className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black'
-							href='/dashboard/view-requests'>
-							Requests
+						<Link href='/dashboard/view-requests'>
+							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+								View Request
+							</button>
 						</Link>
 					</li>
 				</ul>

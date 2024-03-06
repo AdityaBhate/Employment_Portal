@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import YT from "../assets/youtube.svg";
+import INSTA from "../assets/instagram.svg";
+import FB from "../assets/facebook.svg";
 
 function Footer() {
 	return (
@@ -23,33 +25,25 @@ function Footer() {
 				<div className=''>
 					<div className='flex flex-col text-right my-2'>
 						<ul>
-							<li className='my-2'>
-								<Link className='my-2' href='/'>
-									Home
-								</Link>
-							</li>
-							<li className='my-2'>
-								<Link className='my-2' href='/about'>
-									About
-								</Link>
-							</li>
-							<li className='my-2'>
-								<Link className='my-2' href='/register/labour'>
-									Register
-								</Link>
-							</li>
-							<li className='my-2'>
-								<Link className='my-2' href='/dashboard-login'>
-									Dashboard
-								</Link>
-							</li>
 							<li>
-								<div className='flex flex-row gap-3'>
+								<div className='flex flex-col items-start gap-4'>
 									<a
 										href='https://youtube.com/@pravasimajdurKalyansewa?si=GteeFK2uPyz2cVmJ'
 										target='_blank'
 										className='p-3 bg-gray-300 rounded-full'>
 										<Image src={YT} alt='youtube' width={20} height={20} />
+									</a>
+									<a
+										href='https://youtube.com/@pravasimajdurKalyansewa?si=GteeFK2uPyz2cVmJ'
+										target='_blank'
+										className='p-3 bg-gray-300 rounded-full'>
+										<Image src={INSTA} alt='youtube' width={20} height={20} />
+									</a>
+									<a
+										href='https://youtube.com/@pravasimajdurKalyansewa?si=GteeFK2uPyz2cVmJ'
+										target='_blank'
+										className='p-3 bg-gray-300 rounded-full'>
+										<Image src={FB} alt='youtube' width={20} height={20} />
 									</a>
 								</div>
 							</li>

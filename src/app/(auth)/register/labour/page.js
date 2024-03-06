@@ -363,14 +363,14 @@ function LabourRegister() {
 						</Grid>
 					</Grid>
 					<div className='mt-6 mb-4'>
-						<Chip label='Broker Code (Optional)' />
+						<Chip label='Shram Saathi (Optional)' />
 					</div>
 					<Grid className='m-2 mx-4' container spacing={2}>
 						<Grid item xs={12} sm={4}>
 							<TextField
 								className='w-[90%]'
-								label='Referral Broker Code'
-								placeholder='Enter Referred Broker Code'
+								label='Referral Shram Saathi Code'
+								placeholder='Enter Referred Shram Saathi Code'
 								variant='outlined'
 								value={referedBy}
 								onChange={(e) => setReferedBy(e.target.value)}
@@ -381,7 +381,6 @@ function LabourRegister() {
 						<Button
 							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
 							variant='contained'
-							color='success'
 							disabled={loading}
 							onClick={() => registerLabour()}>
 							{loading ? <CircularProgress /> : "Submit"}

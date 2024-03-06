@@ -32,6 +32,7 @@
 // 		res.status(400).json(err);
 // 	}
 // }
+
 import { NextResponse } from "next/server";
 
 export async function GET(req) {

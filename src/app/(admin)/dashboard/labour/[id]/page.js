@@ -167,12 +167,12 @@ function LabourDetails({ params }) {
 					<>
 						<hr className='mt-8 mb-4' />
 						<h1 className='text-2xl text-orange-600 font-bold mb-4 '>
-							Broker Details
+							Shram Saathi Details
 						</h1>
 						<div className='grid grid-cols-2 gap-4 justify-center'>
 							<div className='col-span-2 md:col-span-1'>
 								<label className='block text-gray-700 text-base font-bold mb-1'>
-									BrokerCode
+									Shram Saathi Code
 								</label>
 								<p className='text-gray-700 text-base'>{user.brokerCode}</p>
 							</div>
@@ -189,14 +189,14 @@ function LabourDetails({ params }) {
 					<>
 						<hr className='mt-8 mb-4' />
 						<h1 className='text-2xl text-orange-600 font-bold mb-4 '>
-							Make him a Broker?
+							Make him a Shram Saathi?
 						</h1>
 						<div className='grid grid-cols-2 gap-4 justify-center'>
 							<div className='col-span-2 md:col-span-1'>
 								<button
 									onClick={() => makeBroker(user.id)}
 									className='px-4 py-2 bg-orange-400 color-white rounded-md hover:bg-orange-500'>
-									Genetate BrokerCode
+									Genetate Shram Saathi Code
 								</button>
 							</div>
 						</div>

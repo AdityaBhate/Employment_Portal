@@ -218,8 +218,20 @@ function ClientRegister() {
 								variant='outlined'
 							/>
 						</Grid>
+						<Grid item xs={12} sm={4}>
+							<Button
+								className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
+								variant='contained'
+								// color='success'
+								disabled={loading}
+								onClick={() => {
+									handleSubmit();
+								}}>
+								{loading ? <CircularProgress /> : "Submit"}
+							</Button>
+						</Grid>
 					</Grid>
-					<div className='flex justify-center items-center my-3'>
+					{/* <div className='flex justify-center items-center my-3'>
 						<Button
 							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
 							variant='contained'
@@ -230,7 +242,7 @@ function ClientRegister() {
 							}}>
 							{loading ? <CircularProgress /> : "Submit"}
 						</Button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>
