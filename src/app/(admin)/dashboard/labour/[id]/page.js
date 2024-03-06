@@ -178,7 +178,7 @@ function LabourDetails({ params }) {
 							</div>
 							<div className='col-span-2 md:col-span-1'>
 								<button
-									onClick={() => router.push(`/broker/${code}`)}
+									onClick={() => router.push(`/broker/${user.brokerCode}`)}
 									className='px-4 py-2 bg-orange-400 color-white rounded-md'>
 									See All Referrals
 								</button>
