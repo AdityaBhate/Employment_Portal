@@ -25,7 +25,8 @@
 		"react-dom": "^18",
 		"react-hook-form": "^7.50.1",
 		"react-hot-toast": "^2.4.1",
-		"react-material-ui-carousel": "^3.4.2"
+		"react-material-ui-carousel": "^3.4.2",
+		"shortid": "^2.2.16"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
