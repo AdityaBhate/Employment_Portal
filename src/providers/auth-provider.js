@@ -6,6 +6,7 @@ export async function AuthProvider({ children }) {
 	const cookieStore = cookies();
 	const clientSessionCookie = cookieStore.get("pmks-client-session");
 	const labourSessionCookie = cookieStore.get("pmks-labour-session");
+	const adminSessionCookie = cookieStore.get("pmks-admin-session");
 	if (clientSessionCookie) {
 		let user = await verifyUser(clientSessionCookie.value, "client");
 		console.log(user);
@@ -27,6 +28,10 @@ export async function AuthProvider({ children }) {
 			return redirect("/login/labour");
 		}
 	}
+	if (adminSessionCookie) {
+		return <>{children}</>;
+	}
+
 	return redirect("/");
 }
 
