@@ -26,7 +26,7 @@ model Labour {
   accountName        String
   ifscCode           String
   accountNumber      String
-  brokerCode         String  @unique @default("")
+  brokerCode         String  @default("")
   isBroker           Boolean @default(false)
   referedBy          String
 }
@@ -53,6 +53,6 @@ model Requests {
 
 model Admin {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String @unique
+  username String
   password String
 }

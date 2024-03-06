@@ -93,6 +93,8 @@ export async function POST(req) {
 				referedBy: referedBy,
 			},
 		});
+		console.log("Labour registered successfully");
+
 		cookies().set("pmks-labour-session", labour.id, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
