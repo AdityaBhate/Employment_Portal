@@ -16,28 +16,28 @@ function AdminNavbar() {
 				<ul className='flex items-center justify-end gap-2'>
 					<li>
 						<Link href='/dashboard/labour'>
-							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
 								Labour
 							</button>
 						</Link>
 					</li>
 					<li>
 						<Link href='/dashboard/broker'>
-							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
 								Shram Saathi
 							</button>
 						</Link>
 					</li>
 					<li>
 						<Link href='/dashboard/client'>
-							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
 								Client
 							</button>
 						</Link>
 					</li>
 					<li>
 						<Link href='/dashboard/view-requests'>
-							<button className='px-4 py-2 bg-slate-100 rounded-md text-sm text-black text-center'>
+							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
 								View Request
 							</button>
 						</Link>

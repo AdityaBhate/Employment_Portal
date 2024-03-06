@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import RazorpayButton from "../../../../components/RazorpayButton";
 
 function LabourRegister() {
 	const router = useRouter();

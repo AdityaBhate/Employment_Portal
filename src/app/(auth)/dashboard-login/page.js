@@ -63,7 +63,7 @@ function ClientLogin() {
 		<>
 			<div className='flex items-center justify-center h-full'>
 				<div className='shadow-md py-6 px-4 w-[85%]'>
-					<span className='text-white font-semibold text-xl p-2 bg-black rounded'>
+					<span className='text-white font-semibold text-xl p-2 bg-orange-500 rounded'>
 						Admin Login
 					</span>
 					<div className='my-4'>
