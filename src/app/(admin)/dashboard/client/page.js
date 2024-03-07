@@ -14,7 +14,13 @@ const ClientPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
-			const response = await axios.get("/api/dashboard/client-all");
+			const response = await axios.get("/api/dashboard/client-all", {
+				headers: {
+					"Cache-Control": "no-cache",
+					Pragma: "no-cache",
+					Expires: "0",
+				},
+			});
 			setClients(response?.data?.clients);
 			setLoading(false);
 		};

@@ -25,10 +25,23 @@ function LabourDetails({ params }) {
 	}, []);
 
 	const makeBroker = async (id) => {
-		const response = await axios.post(`/api/broker/create`, {
-			id,
-		});
+		setLoading(true);
+		const response = await axios.post(
+			`/api/broker/create`,
+			{
+				id,
+			},
+			{
+				headers: {
+					"Cache-Control": "no-cache",
+					Pragma: "no-cache",
+					Expires: "0",
+				},
+			}
+		);
+		setLoading(false);
 		toast.success(response?.data?.message);
+		router.push(`/dashboard/broker`);
 	};
 
 	if (loading) {
@@ -194,9 +207,14 @@ function LabourDetails({ params }) {
 						<div className='grid grid-cols-2 gap-4 justify-center'>
 							<div className='col-span-2 md:col-span-1'>
 								<button
+									disabled={loading}
 									onClick={() => makeBroker(user.id)}
 									className='px-4 py-2 bg-orange-400 color-white rounded-md hover:bg-orange-500'>
-									Genetate Shram Saathi Code
+									{loading ? (
+										<CircularProgress />
+									) : (
+										"Genetate Shram Saathi Code"
+									)}
 								</button>
 							</div>
 						</div>

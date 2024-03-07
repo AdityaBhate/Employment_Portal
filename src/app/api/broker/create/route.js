@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 import { db } from "../../../../utils/db";
 
@@ -31,7 +33,7 @@ export async function POST(req) {
 	let uniqueCode;
 	while (true) {
 		uniqueCode = Math.random().toString().slice(2, 8);
-		const existingCode = await db.labour.findUnique({
+		const existingCode = await db.labour.findFirst({
 			where: { brokerCode: uniqueCode },
 		});
 		if (!existingCode) {

@@ -12,7 +12,13 @@ function DashboardPage() {
 		async function getMetrics() {
 			try {
 				setLoading(true);
-				const metrics = await axios.get("/api/dashboard/metrics");
+				const metrics = await axios.get("/api/dashboard/metrics", {
+					headers: {
+						"Cache-Control": "no-cache",
+						Pragma: "no-cache",
+						Expires: "0",
+					},
+				});
 				setMetrics(metrics?.data);
 				setLoading(false);
 			} catch (error) {

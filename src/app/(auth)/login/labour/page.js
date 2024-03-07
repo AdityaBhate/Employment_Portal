@@ -30,8 +30,8 @@ function ClientLogin() {
 		setLoading(true);
 		if (validateForm()) {
 			const payload = {
-				labourName,
-				aadharNumber,
+				labourName: labourName.trim(),
+				aadharNumber: aadharNumber.trim(),
 			};
 			axios
 				.post("/api/auth/login/labour", payload)

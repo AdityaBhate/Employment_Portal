@@ -122,7 +122,13 @@ function LabourRegister() {
 				referedBy,
 			};
 			axios
-				.post("/api/auth/register/labour", payload)
+				.post("/api/auth/register/labour", payload, {
+					headers: {
+						"Cache-Control": "no-cache",
+						Pragma: "no-cache",
+						Expires: "0",
+					},
+				})
 				.then((response) => {
 					setData(response.data);
 					setLoading(false);

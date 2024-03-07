@@ -13,7 +13,13 @@ const LabourPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
-			const response = await axios.get("/api/dashboard/broker-all");
+			const response = await axios.get("/api/dashboard/broker-all", {
+				headers: {
+					"Cache-Control": "no-cache",
+					Pragma: "no-cache",
+					Expires: "0",
+				},
+			});
 			setLabours(response?.data?.labours);
 			setLoading(false);
 		};

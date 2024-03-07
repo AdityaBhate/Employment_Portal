@@ -80,7 +80,13 @@ function ClientRegister() {
 					labourCategory,
 				};
 				axios
-					.post("/api/auth/register/client", payload)
+					.post("/api/auth/register/client", payload, {
+						headers: {
+							"Cache-Control": "no-cache",
+							Pragma: "no-cache",
+							Expires: "0",
+						},
+					})
 					.then((response) => {
 						setData(response.data);
 						setLoading(false);
