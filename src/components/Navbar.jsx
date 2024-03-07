@@ -10,7 +10,12 @@ function Navbar() {
 			<div>
 				<Link href={"/"} className='flex items-center justify-center gap-4'>
 					<Image src='/emp-logo2.jpg' alt='logo' width={120} height={120} />
-					<p className='text-4xl font-bold '>प्रवासी मजदूर कल्याण सेवा</p>
+					<p className='flex flex-col gap-2'>
+						<span className='text-4xl font-bold '>
+							प्रवासी मजदूर कल्याण सेवा
+						</span>
+						<span className='text-xl '>Pravashi Majdoor Kalyan Seva</span>
+					</p>
 				</Link>
 			</div>
 			<div className='flex-grow'>

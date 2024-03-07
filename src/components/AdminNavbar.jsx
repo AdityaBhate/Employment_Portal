@@ -15,12 +15,20 @@ function AdminNavbar() {
 			<div className='flex-grow'>
 				<ul className='flex items-center justify-end gap-2'>
 					<li>
+						<Link href='/dashboard'>
+							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
+								Dashboard
+							</button>
+						</Link>
+					</li>
+					<li>
 						<Link href='/dashboard/labour'>
 							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>
 								Labour
 							</button>
 						</Link>
 					</li>
+
 					<li>
 						<Link href='/dashboard/broker'>
 							<button className='px-4 py-2 bg-orange-400 hover:bg-orange-500/50 rounded-md text-sm text-black text-center'>

@@ -54,20 +54,28 @@ export default function Home() {
 					</div>
 					<div className='mt-8 flex flex-col gap-16 justify-around items-center'>
 						<div className='flex sm:flex-row  gap-16 justify-around items-center'>
-							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
-								<a href='/'>Home</a>
-							</button>
-							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
-								<a href='/dashboard'>Dashboard</a>
-							</button>
+							<a href='/'>
+								<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
+									Home
+								</button>
+							</a>
+							<a href='/dashboard'>
+								<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
+									Dashboard
+								</button>
+							</a>
 						</div>
 						<div className='flex sm:flex-row gap-16 justify-around items-center'>
-							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
-								<a href='/register/labour'>Labour Registration</a>
-							</button>
-							<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
-								<a href='/register/client'>Client Registration</a>
-							</button>
+							<a href='/register/labour'>
+								<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
+									Labour Registration
+								</button>
+							</a>
+							<a href='/register/client'>
+								<button className='w-32 h-16 font-semibold bg-orange-400 rounded-md text-sm text-black border-2 border-slate-600 hover:bg-orange-600/50'>
+									Client Registration
+								</button>
+							</a>
 						</div>
 					</div>
 				</div>

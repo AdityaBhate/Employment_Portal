@@ -45,7 +45,7 @@ const LabourPage = () => {
 	return (
 		<div className='p-2'>
 			<div className='flex items-center justify-between  mb-6'>
-				<h1 className='text-xl'>Labour Details</h1>
+				<h1 className='text-xl'>Shram Sathi Details</h1>
 				<TextField
 					label='Search by name'
 					variant='standard'

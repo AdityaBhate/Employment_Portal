@@ -9,17 +9,17 @@ import Paper from "@mui/material/Paper";
 
 const ClientTable = ({ clients }) => {
 	return (
-		<TableContainer component={Paper} className='p-2'>
+		<TableContainer component={Paper} className='p-2 border-2 border-zinc-400'>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>Client Name</TableCell>
-						<TableCell>Father Name</TableCell>
-						<TableCell>Company Name</TableCell>
-						<TableCell>Labour Category</TableCell>
-						<TableCell>Mobile Number</TableCell>
-						<TableCell>Email ID</TableCell>
-						<TableCell>Residential Address</TableCell>
+						<TableCell className='font-bold'>Client Name</TableCell>
+						<TableCell className='font-bold'>Father Name</TableCell>
+						<TableCell className='font-bold'>Company Name</TableCell>
+						<TableCell className='font-bold'>Labour Category</TableCell>
+						<TableCell className='font-bold'>Mobile Number</TableCell>
+						<TableCell className='font-bold'>Email ID</TableCell>
+						<TableCell className='font-bold'>Residential Address</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

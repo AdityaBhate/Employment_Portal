@@ -14,22 +14,23 @@ import moment from "moment";
 const LabourTable = ({ labours }) => {
 	return (
 		<>
-			<TableContainer component={Paper} className='p-2'>
+			<TableContainer
+				component={Paper}
+				className='p-2 border-2 border-zinc-400'>
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell>Labour Name</TableCell>
-							<TableCell>Father Name</TableCell>
-							<TableCell>Gender</TableCell>
-							<TableCell>Date of Birth</TableCell>
-							<TableCell>Caste</TableCell>
-							<TableCell>Mobile Number</TableCell>
-
-							<TableCell>Residential Address</TableCell>
-							<TableCell>District Name</TableCell>
-							<TableCell>State</TableCell>
-							<TableCell>Education</TableCell>
-							<TableCell>Labour Type</TableCell>
+							<TableCell className='font-bold'>Labour Name</TableCell>
+							<TableCell className='font-bold'>Father Name</TableCell>
+							<TableCell className='font-bold'>Gender</TableCell>
+							<TableCell className='font-bold'>Date of Birth</TableCell>
+							<TableCell className='font-bold'>Caste</TableCell>
+							<TableCell className='font-bold'>Mobile Number</TableCell>
+							<TableCell className='font-bold'>Residential Address</TableCell>
+							<TableCell className='font-bold'>District Name</TableCell>
+							<TableCell className='font-bold'>State</TableCell>
+							<TableCell className='font-bold'>Education</TableCell>
+							<TableCell className='font-bold'>Labour Type</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
