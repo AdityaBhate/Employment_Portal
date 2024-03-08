@@ -147,6 +147,7 @@ function LabourRegister() {
 	};
 
 	const makePayment = async () => {
+		setLoading(true);
 		const res = await initializeRazorpay();
 
 		if (!res) {
@@ -180,6 +181,7 @@ function LabourRegister() {
 
 		const paymentObject = new window.Razorpay(options);
 		paymentObject.open();
+		setLoading(false);
 	};
 
 	const initializeRazorpay = () => {
