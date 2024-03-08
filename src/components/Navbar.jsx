@@ -14,7 +14,7 @@ function Navbar() {
 						<span className='text-4xl font-bold '>
 							प्रवासी मजदूर कल्याण सेवा
 						</span>
-						<span className='text-xl '>Pravashi Majdoor Kalyan Seva</span>
+						<span className='text-xl'>Pravashi Majdoor Kalyan Seva</span>
 					</p>
 				</Link>
 			</div>

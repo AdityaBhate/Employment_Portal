@@ -13,10 +13,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import RazorpayButton from "../../../../components/RazorpayButton";
 
 function LabourRegister() {
 	const router = useRouter();
+
+	const [orderId, setOrderId] = useState("");
 
 	const [labourName, setLabourName] = useState("");
 	const [fatherName, setFatherName] = useState("");
@@ -143,6 +144,58 @@ function LabourRegister() {
 			setLoading(false);
 			toast.error("Please fill all required fields correctly.");
 		}
+	};
+
+	const makePayment = async () => {
+		const res = await initializeRazorpay();
+
+		if (!res) {
+			alert("Razorpay SDK Failed to load");
+			return;
+		}
+		const data = await fetch("/api/payment/razorpay", { method: "POST" }).then(
+			(t) => t.json()
+		);
+		console.log(data);
+		var options = {
+			key: process.env.RAZORPAY_KEY,
+			name: "PM Kalyan Yojana",
+			currency: data.currency,
+			amount: data.amount,
+			order_id: data.id,
+			description: "Thank you for Registering",
+			handler: function (response) {
+				// alert(response.razorpay_payment_id);
+				// alert(response.razorpay_order_id);
+				alert("Payment Successful");
+				setOrderId(response.razorpay_order_id);
+				registerLabour();
+			},
+			prefill: {
+				name: "Aditya Bhate",
+				email: "adityabhate@gmail.com",
+				contact: "9999999999",
+			},
+		};
+
+		const paymentObject = new window.Razorpay(options);
+		paymentObject.open();
+	};
+
+	const initializeRazorpay = () => {
+		return new Promise((resolve) => {
+			const script = document.createElement("script");
+			script.src = "https://checkout.razorpay.com/v1/checkout.js";
+
+			script.onload = () => {
+				resolve(true);
+			};
+			script.onerror = () => {
+				resolve(false);
+			};
+
+			document.body.appendChild(script);
+		});
 	};
 
 	return (
@@ -385,13 +438,23 @@ function LabourRegister() {
 						</Grid>
 					</Grid>
 					<div className='flex items-center justify-center mx-4 my-6 w-full'>
-						<Button
-							className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
-							variant='contained'
-							disabled={loading}
-							onClick={() => registerLabour()}>
-							{loading ? <CircularProgress /> : "Submit"}
-						</Button>
+						{orderId === "" ? (
+							<Button
+								className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
+								variant='contained'
+								disabled={loading}
+								onClick={() => makePayment()}>
+								{loading ? <CircularProgress /> : "Pay Registration Fee (50)"}
+							</Button>
+						) : (
+							<Button
+								className='bg-orange-400 text-black w-[90%] hover:bg-orange-600/50'
+								variant='contained'
+								disabled={loading}
+								onClick={() => registerLabour()}>
+								{loading ? <CircularProgress /> : "Register Labour"}
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>
