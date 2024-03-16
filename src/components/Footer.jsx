@@ -22,7 +22,25 @@ function Footer() {
 						/>
 					</Link>
 				</div>
-				<div className=''>
+				<div className='flex gap-4 items-center'>
+					<div className='flex flex-col text-right my-2 mr-6'>
+						<div className='flex flex-col items-start gap-4'>
+							<h4 className='text-black font-semibold text-lg'>Useful Links</h4>
+							<a href='/' className='p-l text-sm underline'>
+								Home
+							</a>
+							<a href='/about' className='p-l text-sm underline'>
+								About
+							</a>
+							<a href='/register/client' className='p-l text-sm underline'>
+								Client Registation
+							</a>
+							<a href='/register/labour' className='p-l text-sm underline'>
+								Labour Registation
+							</a>
+						</div>
+					</div>
+					<div className='p-[1px]  mx-4 bg-gray-500'></div>
 					<div className='flex flex-col text-right my-2'>
 						<ul>
 							<li>
@@ -70,6 +88,12 @@ function Footer() {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className='text-sm text-center bg-gray-400 items-center justify-center p-2 flex gap-2'>
+				<span>@PMkalyanseva</span>
+				<Link href='/terms-and-conditions' className='underline'>
+					Terms and condition applied
+				</Link>
 			</div>
 		</>
 	);

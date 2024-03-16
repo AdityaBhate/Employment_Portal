@@ -1,21 +1,18 @@
 import React from "react";
-import { AuthProvider } from "../../providers/auth-provider";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-function layout({ children }) {
+export default function Layout({ children }) {
 	return (
 		<div>
-			{/* <Navbar />
-			<AuthProvider>{children}</AuthProvider>
-			<Footer /> */}
+			<Navbar />
+			{/* {children} */}
 			<div className='flex flex-col p-4'>
 				<p className='text-center text-5xl font-bold mt-4'>
 					❌ Website Down ❌
 				</p>
 			</div>
+			<Footer />
 		</div>
 	);
 }
-
-export default layout;
